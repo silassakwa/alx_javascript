@@ -1,0 +1,1 @@
+const myvar="JavaScript is amazing:"
