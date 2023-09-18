@@ -1,19 +1,23 @@
 #!/usr/bin/node
 
 function createClassRoom(numberOfStudents) {
-    var studentSeats = [];
-
+    var students = [];
+    
     function studentSeat(seat) {
-        return seat;
-    };
-
-    for (var i = 0; i < numberOfStudents; i++) {
-        var student = studentSeat(i + 1);
-        studentSeats.push(student);
+        return function () {
+            return seat;
+        };
     }
 
-    return studentSeats;
+    for (var i = 0; i < numberOfStudents; i++) {
+        students.push(studentSeat(i + 1));
+    }
+
+    return students;
 }
 
-var classroom = createClassRoom(10);
-console.log(classroom);
+var classRoom = createClassRoom(10);
+
+console.log(classRoom[0]()); 
+console.log(classRoom[3]());
+console.log(classRoom[9]()); 
