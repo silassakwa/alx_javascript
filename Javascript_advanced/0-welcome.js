@@ -1,16 +1,10 @@
 #!/usr/bin/node
-function welcome(firstName, lastName) {
-    // Concatenate firstName and lastName with a space in between
-    let fullName = firstName + ' ' + lastName;
-  
-    // Define the inner function displayFullName
-    function displayFullName() {
-      alert('Welcome ' + fullName + '!');
-    }
-  
-    // Call the inner function displayFullName
-    displayFullName();
+ function welcome(firstname,lastname)
+ {
+  let fullname=firstname+ ""+lastname;
+  function displayFullname()
+  {
+    alert("welcome "+ fullname +"!")
   }
-  
-  // Call the welcome function
-  welcome('John', 'Doe');
+  displayFullname();
+ }
