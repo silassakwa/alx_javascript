@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies & Local Storage</title>
+</head>
+<body>
+    <div id="login-form">
+        <h2>Login Form</h2>
+        <input type="text" id="firstname" placeholder="First Name">
+        <input type="text" id="email" placeholder="Email">
+        <button onclick="setCookiesAndShowWelcomeMessage()">Log me in</button>
+    </div>
+    <button onclick="showWelcomeMessageOrForm()">Show Welcome</button>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js">
+
+// Task 4. Use js-cookie
+
+function setCookiesAndShowWelcomeMessage() {
+    const firstnameValue = document.getElementById("firstname").value;
+    const emailValue = document.getElementById("email").value;
+
+    // Calculate the expiration date (10 days from now)
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 10);
+
+    // Set cookies with js-cookie
+    Cookies.set("firstname", firstnameValue, { expires: 10 });
+    Cookies.set("email", emailValue, { expires: 10 });
+
+    showWelcomeMessageOrForm();
+}
+
+function showWelcomeMessageOrForm() {
+    const firstname = Cookies.get("firstname");
+    if (firstname) {
+        // User is logged in
+        const body = document.body;
+        body.innerHTML = `<h1>Welcome ${firstname} <a href="#" onclick="deleteCookiesAndShowForm()"> (logout)</a></h1>`;
+    } else {
+        // User is not logged in
+        showForm();
+    }
+}
+
+function showForm() {
+    const welcomeMessage = document.getElementById("welcome-message");
+    if (welcomeMessage) {
+        welcomeMessage.remove();
+    }
+    const loginForm = document.getElementById("login-form");
+    loginForm.style.display = "block";
+}
+
+function deleteCookiesAndShowForm() {
+    // Remove cookies with js-cookie
+    Cookies.remove("firstname");
+    Cookies.remove("email");
+    
+    showForm();
+}
+
+    </script>
+</body>
+</html>
