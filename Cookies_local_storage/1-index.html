@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies & Local Storage</title>
+</head>
+<body>
+    <h1>Login to the website</h1>
+    <input type="text" id="firstname" placeholder="First Name">
+    <input type="text" id="email" placeholder="Email">
+    <button onclick="setCookies()">Log me in</button>
+    <h1>Cookies</h1>
+    <button onclick="showCookies()">Show the cookies</button>
+
+    <script>
+
+// Task 1. Create cookie with expiration date and specific path
+
+function setCookies() {
+    const firstnameValue = document.getElementById("firstname").value;
+    const emailValue = document.getElementById("email").value;
+
+    // Calculate the expiration date (10 days from now)
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 10);
+
+    // Set cookies with expiration date
+    document.cookie = `firstname=${firstnameValue}; expires=${expirationDate.toUTCString()}`;
+    document.cookie = `email=${emailValue}; expires=${expirationDate.toUTCString()}`;
+}
+
+function showCookies() {
+    const cookies = document.cookie;
+    const paragraph = document.createElement("p");
+    paragraph.innerHTML = `Cookies: ${cookies}`;
+    document.body.appendChild(paragraph);
+}
+
+
+
+    </script>
+</body>
+</html>
