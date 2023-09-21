@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies & Local Storage</title>
+</head>
+<body>
+    <h1>Login to the website</h1>
+    <div id="loginForm">
+        <input type="text" id="firstname" placeholder="First Name">
+        <input type="text" id="email" placeholder="Email">
+        <button onclick="setCookies()">Log me in</button>
+    </div>
+    <h1>Cookies</h1>
+    <button onclick="showCookies()">Show the cookies</button>
+
+    <script>
+        
+ // Task 3. Delete cookie and mini application
+
+        function showForm() {
+            const welcomeMessage = document.getElementById("welcomeMessage");
+            const loginForm = document.getElementById("loginForm");
+            
+            if (welcomeMessage) {
+                welcomeMessage.style.display = "none";
+            }
+            
+            loginForm.style.display = "block";
+        }
+
+        function hideForm() {
+            const loginForm = document.getElementById("loginForm");
+            loginForm.style.display = "none";
+        }
+
+        function deleteCookiesAndShowForm() {
+            document.cookie = "firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+            document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+            showForm();
+        }
+
+        function showWelcomeMessageOrForm() {
+            const cookies = document.cookie;
+            const firstName = getCookie("firstname");
+
+            if (firstName) {
+                const body = document.body;
+                body.innerHTML = `<h1 id="welcomeMessage">Welcome ${firstName} <a href="#" onclick="deleteCookiesAndShowForm()"> (logout)</a></h1>`;
+            } else {
+                showForm();
+            }
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            
+            if (parts.length === 2) {
+                return parts.pop().split(';').shift();
+            }
+        }
+
+        function setCookies() {
+            const firstName = document.getElementById("firstname").value;
+            const email = document.getElementById("email").value;
+            document.cookie = `firstname=${firstName}`;
+            document.cookie = `email=${email}`;
+            showWelcomeMessageOrForm();
+        }
+
+        function showCookies() {
+            alert(document.cookie);
+        }
+
+        showWelcomeMessageOrForm();
+    </script>
+</body>
+</html>
