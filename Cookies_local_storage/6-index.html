@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage Project</title>
+  <script>
+      
+    // Create an array availableItems that will contain all the available items.
+let availableItems = ['Shampoo', 'Soap', 'Sponge', 'Water'];
+
+// Check if Session storage is enabled on your browser
+if (typeof(Storage) !== "undefined") {
+    createStore();
+    displayCart();
+} else {
+    alert('Sorry, your browser does not support Web storage. Try again with a better one');
+}
+
+function addItemToCart(item) {
+    sessionStorage.setItem(item, true);
+}
+
+function createStore() {
+    let ul = document.createElement('ul');
+    document.body.appendChild(ul);
+
+    availableItems.forEach(function(item) {
+        let li = document.createElement('li');
+        li.textContent = item;
+        li.addEventListener('click', function() {
+            addItemToCart(item);
+        });
+        ul.appendChild(li);
+    });
+}
+
+function displayCart() {
+    let count = 0;
+    for(let i=0; i<sessionStorage.length; i++) {
+        if(sessionStorage.getItem(sessionStorage.key(i)) === 'true') {
+            count++;
+        }
+    }
+    
+    if(count > 0) {
+        let p = document.createElement('p');
+        p.textContent = `You previously had ${count} items in your cart`;
+        document.body.appendChild(p);
+    }
+}
+    </script>
+</body>
+</html>
