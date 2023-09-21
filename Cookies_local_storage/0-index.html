@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies & Local Storage</title>
+</head>
+<body>
+    <h1>Login to the website</h1>
+    <input type="text" id="firstname" placeholder="First Name">
+    <input type="text" id="email" placeholder="Email">
+    <button onclick="setCookies()">Log me in</button>
+    <h1>Cookies</h1>
+    <button onclick="showCookies()">Show the cookies</button>
+
+    <script>
+        
+/*Task 0. Create basic cookie*/
+
+ // This function sets the cookies `firstname` and `email` with the values in the `firstname` and `email` inputs, respectively.
+
+ function setCookies() {
+    const firstnameValue = document.getElementById("firstname").value;
+    const emailValue = document.getElementById("email").value;
+  
+    document.cookie = `firstname=${firstnameValue}`;
+    document.cookie = `email=${emailValue}`;
+  }
+  
+function showCookies() {
+    // Get the value of all cookies.
+    const cookies = document.cookie;
+  
+    // Create a paragraph element.
+    const paragraph = document.createElement("p");
+  
+    // Set the inner HTML of the paragraph element using a template literal.
+    paragraph.innerHTML = `Cookies: ${cookies}`;
+  
+    // Append the paragraph element to the body of the document.
+    document.body.appendChild(paragraph);
+  }  
+    </script>
+</body>
+</html>
